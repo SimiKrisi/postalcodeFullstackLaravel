@@ -12,7 +12,16 @@
 
 <ul>
     @foreach($counties as $county)
-        <li>{{ $county->id }} - {{ $county->name }}</li>
+        <li>
+            {{ $county->name }}
+            <a href="{{ route('counties.edit', $county->id) }}" class="button">Edit</a>
+            <a href="{{ route('counties.show', $county->id) }}" class="button">Show</a>
+            <form action="{{ route('counties.destroy', $county->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" onclick="return confirm('You Sure To Delete?')">Delete</button>
+            </form>
+        </li>
     @endforeach
 </ul>
 

@@ -46,7 +46,8 @@ class CountiesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $county = County::findOrFail($id);
+        return view('counties.show', compact('county'));
     }
 
     /**
@@ -54,7 +55,8 @@ class CountiesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $county = County::findOrFail($id);
+        return view('counties.edit', compact('county'));
     }
 
     /**
@@ -62,7 +64,15 @@ class CountiesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        request()->validate(
+            ['name' => 'required|string|max:50',],
+            ['name.required' => 'A megye neve kötelező mező.',]
+
+        );
+        $county = County::findOrFail($id);
+        $county->name = $request->name;
+        $county->save();
+        return redirect()->route('counties.index')->with('success', 'County updated successfully.');
     }
 
     /**
@@ -70,6 +80,8 @@ class CountiesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $county = County::findOrFail($id);
+        $county->delete();
+        return redirect()->route('counties.index')->with('success', 'County deleted successfully.');
     }
 }

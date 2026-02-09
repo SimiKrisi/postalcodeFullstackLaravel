@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('postalcodes', function (Blueprint $table) {
             $table->id();
-            $table->integer('county_id')->nullable();
-            $table->foreignId('county_id')->references('id')->on('counties')->onDelete('set null');
+            //$table->integer('county_id')->nullable();
+            $table->foreignId('county_id')->nullable()->references('id')->on('counties')->onDelete('set null');
             $table->unsignedBigInteger('code');
             $table->string('placename');
             $table->timestamps();
