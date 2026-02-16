@@ -30,6 +30,7 @@ class CountiesController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate(
             ['name' => 'required|string|max:50',],
             ['name.required' => 'A megye neve kötelező mező.',]

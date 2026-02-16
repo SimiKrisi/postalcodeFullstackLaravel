@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId('county_id')->nullable()->references('id')->on('counties')->onDelete('set null');
             $table->unsignedBigInteger('code');
             $table->string('placename');
-            $table->timestamps();
+            //$table->timestamps()->default("CURRENT_TIMESTAMP");
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

@@ -12,8 +12,7 @@
         <nav>
             <ul>
                 <li><a href="{{route('counties.index')}}">Counties</a></li>
-                <li><a href="{{route('counties.create')}}">Create County</a></li>
-                
+                <li><a href="{{route('postalcodes.index')}}">Postal Codes</a></li>
             </ul>
         </nav> 
     </header>

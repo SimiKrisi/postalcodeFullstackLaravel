@@ -1,17 +1,23 @@
 @extends('layout')
-
 @section('content')
-<h1>"{{$county->name}}" County details</h1>
-<h2>County ID: {{$county->id}}</h2>
-<h2>Postal Codes in this County:</h2>
+
+
+<h1>Postal Codes
+    <a href="{{ route('postalcodes.create') }}" class="button">Create New</a>
+</h1>
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <ul>
-    @foreach($county->postalcodes as $postalcode)
-        <li>
-            {{ $postalcode->placename }} ({{ $postalcode->code }})
+    @foreach($postalcodes as $postalcode)
+        <li class="actions">
+            {{ $postalcode->code }} - {{ $postalcode->placename }}
             <a href="{{ route('postalcodes.show', $postalcode->id) }}" class="button">Show</a>
             <a href="{{ route('postalcodes.edit', $postalcode->id) }}" class="button">Edit</a>
             
-            <form action="{{ route('postalcodes.destroy', $postalcode->id) }}" method="POST" style="display:inline;">
+            <form action="{{ route('postalcodes.destroy', $postalcode->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="danger" onclick="return confirm('You Sure To Delete?')">Delete</button>
@@ -19,7 +25,4 @@
         </li>
     @endforeach
 </ul>
-<h2>Created at: {{$county->created_at}}</h2>
-<h2>Updated at: {{$county->updated_at}}</h2>
-
 @endsection

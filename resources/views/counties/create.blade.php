@@ -13,8 +13,9 @@
     <fieldset>
         <label for="name">Name:</label>
         <input type="text" name="name" id="name">
-        <button type="submit">Create</button>
+        
     </fieldset>
+    <button type="submit">Create</button>
 </form>
 
 @endsection
