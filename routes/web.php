@@ -5,6 +5,7 @@ use App\Http\Controllers\PostalcodeController;
 use App\Http\Controllers\ExportController;
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -13,5 +14,5 @@ Route::resource('postalcodes', PostalcodeController::class);
 
 Route::get('/export/csv', [ExportController::class, 'csv'])->name('export.csv');
 Route::get('/export/pdf', [ExportController::class, 'pdf'])->name('export.pdf');    
+Route::post('/export/send-pdf', [ExportController::class, 'sendPdfEmail'])->name('export.sendEmail');
 Route::resource('export', ExportController::class);
-?>

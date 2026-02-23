@@ -10,6 +10,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Console;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DocumentExportMail;
+
 class ExportController extends Controller
 {
     /**
@@ -49,6 +52,20 @@ class ExportController extends Controller
         $query = $this->applyFilters(Postalcode::query(), $request);
         return Excel::download(new Export($query), 'postalcodes.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
+
+    public function sendPdfEmail(Request $request)
+    {
+
+        $query = $this->applyFilters(Postalcode::query(), $request);
+        $pdfContent = Excel::raw(new Export($query), \Maatwebsite\Excel\Excel::DOMPDF);
+        $userEmail = $request->input('emailaddress');
+        
+        Mail::to($userEmail)->send(new DocumentExportMail($pdfContent));
+        
+        return back()->with('success', 'A PDF-et sikeresen elküldtük emailben!');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

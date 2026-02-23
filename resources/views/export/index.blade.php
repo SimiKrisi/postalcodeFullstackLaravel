@@ -6,6 +6,14 @@
     {{-- TODO: Implement Export Functionality --}}
     <a href="{{route('export.csv', request()->query())}}" class="button">Export to CSV</a> 
     <a href="{{route('export.pdf', request()->query())}}" class="button">Export to PDF</a>
+    <form action="{{ route('export.sendEmail', request()->query()) }}" method="POST">
+    @csrf
+        <label for="emailaddress">Email Address:</label>
+        <input type="email" name="emailaddress" id="emailaddress" required>
+        <button type="submit" class="btn btn-primary">
+            Send Email
+        </button>
+    </form>
 </h1>
 
 @if(session('success'))
