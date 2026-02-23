@@ -11,8 +11,10 @@
         <img src="{{ asset('logo.png') }}" alt="Logo" >
         <nav>
             <ul>
+                <li><a href="{{route('export.index')}}">Export</a></li>
                 <li><a href="{{route('counties.index')}}">Counties</a></li>
                 <li><a href="{{route('postalcodes.index')}}">Postal Codes</a></li>
+                
             </ul>
         </nav> 
     </header>
