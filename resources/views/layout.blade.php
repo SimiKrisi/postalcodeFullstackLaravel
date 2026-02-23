@@ -14,7 +14,17 @@
                 <li><a href="{{route('export.index')}}">Export</a></li>
                 <li><a href="{{route('counties.index')}}">Counties</a></li>
                 <li><a href="{{route('postalcodes.index')}}">Postal Codes</a></li>
-                
+                @guest
+                    <li><a href="{{ route('login') }}" class="btn btn-outline-primary">Login</a></li>
+                    <li><a href="{{ route('register') }}" class="btn btn-primary">Register</a></li>
+                @endguest
+                @auth
+                    
+                    <li><form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Kijelentkezés</button>
+                    </form></li>
+                @endauth
             </ul>
         </nav> 
     </header>
